@@ -46,6 +46,24 @@ export const useSavedOpportunities = () => {
     }
   };
 
+  const addSaved = async (opportunityId: string, userId: string | null = null) => {
+    try {
+      const res = await fetch('/api/saved', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ opportunityId, userId }),
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Failed to save opportunity');
+      }
+      // Re-fetch list to include the new saved opp
+      await fetchSaved();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const removeSaved = async (id: string) => {
     if (!confirm('Are you sure you want to remove this from your tracker?')) return;
     setSavedOpps(prev => prev.filter(o => o.id !== id));
@@ -54,9 +72,10 @@ export const useSavedOpportunities = () => {
       if (!res.ok) throw new Error('Failed to remove');
     } catch (err) {
       console.error(err);
-      fetchSaved();
+      // Re-fetch to sync state on error
+      await fetchSaved();
     }
   };
 
-  return { savedOpps, loading, error, updateSaved, removeSaved };
+  return { savedOpps, loading, error, updateSaved, addSaved, removeSaved };
 };
