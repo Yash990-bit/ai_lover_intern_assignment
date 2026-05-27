@@ -1,0 +1,19 @@
+# Copy to .github/workflows/daily-pipeline.yml after your GitHub credential has
+# the "workflow" scope (classic PAT) or Workflows permission (fine-grained PAT).
+name: Daily Opportunity Pipeline
+
+on:
+  schedule:
+    # Run everyday at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Pipeline via API
+        run: |
+          curl -X POST "${{ secrets.PROD_URL }}/api/pipeline/run" \
+          -H "x-pipeline-secret: ${{ secrets.PIPELINE_SECRET }}" \
+          -H "Content-Type: application/json"

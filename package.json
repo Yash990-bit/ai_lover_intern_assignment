@@ -1,0 +1,43 @@
+{
+  "name": "scrapescout-ai",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "seed": "tsx scripts/seed.ts",
+    "scrape": "tsx --env-file=.env.local scripts/runScrapers.ts",
+    "process-raw": "tsx --env-file=.env.local scripts/processRawOpportunities.ts",
+    "pipeline": "tsx --env-file=.env.local scripts/dailyPipeline.ts"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@supabase/supabase-js": "^2.105.4",
+    "@types/three": "^0.184.1",
+    "cheerio": "^1.2.0",
+    "framer-motion": "^12.38.0",
+    "next": "16.2.6",
+    "openai": "^6.37.0",
+    "playwright-core": "^1.60.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "three": "^0.184.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/cheerio": "^0.22.35",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "dotenv": "^17.4.2",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
+}
