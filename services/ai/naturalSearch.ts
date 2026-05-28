@@ -19,7 +19,7 @@ export async function parseNaturalSearchQuery(
 ): Promise<OpportunityFilters | null> {
   const client = checkAiClient();
 
-  const prompt = `You are a query parser for the ScrapeScout AI platform.
+  const prompt = `You are a query parser for the DataScout AI platform.
 Convert the following natural language query into a JSON object representing search filters.
 
 Valid fields:

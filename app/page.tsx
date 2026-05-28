@@ -80,7 +80,7 @@ export default function LandingPage() {
             </h1>
             
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-              ScrapeScout AI combines real-time multi-source scraping with artificial intelligence to deliver high-impact scholarships, fellowships, grants, and accelerators straight to you.
+              DataScout AI combines real-time multi-source scraping with artificial intelligence to deliver high-impact scholarships, fellowships, grants, and accelerators straight to you.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
@@ -106,20 +106,38 @@ export default function LandingPage() {
           {/* Visual Floating Graphic */}
           <div className="hidden lg:block relative w-80 h-80">
             <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-600/10 to-orange-500/10 blur-2xl animate-pulse" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/70 border border-slate-200/80 rounded-[3rem] shadow-2xl p-6 flex flex-col justify-between backdrop-blur-md">
-              <div className="flex justify-between items-center">
-                <span className="text-4xl">🧠</span>
-                <span className="text-[10px] font-bold text-slate-400 bg-slate-50 border border-slate-100 rounded-full px-2.5 py-0.5 uppercase tracking-wide">Discovery</span>
-              </div>
-              <div className="space-y-2">
-                <div className="h-4 w-3/4 bg-blue-600/15 rounded-md" />
-                <div className="h-3 w-5/6 bg-slate-100 rounded-md" />
-                <div className="h-3 w-2/3 bg-slate-100 rounded-md" />
-              </div>
-              <div className="flex justify-between items-center pt-4 border-t border-slate-100">
-                <span className="text-slate-400 text-xs font-bold">Active Listings</span>
-                <span className="text-blue-600 font-black text-xl">{totalCount !== null ? totalCount : '130+'}</span>
-              </div>
+            
+            {/* Absolute Centered Parent Container */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64">
+              {/* Inner card with smooth floating motion */}
+              <motion.div
+                className="w-full h-full bg-white/80 border border-slate-200/80 rounded-[3rem] shadow-2xl p-6 flex flex-col justify-between backdrop-blur-md"
+                animate={{
+                  y: [0, -15, 0]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <div className="flex justify-between items-center">
+                  <span className="text-4xl">🧠</span>
+                  <span className="text-[10px] font-bold text-slate-400 bg-slate-50 border border-slate-100 rounded-full px-2.5 py-0.5 uppercase tracking-wide">Discovery</span>
+                </div>
+                
+                {/* Premium Featured Opportunity Preview */}
+                <div className="space-y-1.5 text-left border-l-2 border-l-blue-500 pl-3 py-1">
+                  <p className="text-[9px] font-bold text-blue-600 uppercase tracking-wider">Featured Grant</p>
+                  <p className="text-xs font-extrabold text-slate-800 leading-tight">Global AI Fellowship</p>
+                  <p className="text-[10px] text-slate-400 font-semibold">$50,000 Funding · Remote</p>
+                </div>
+                
+                <div className="flex justify-between items-center pt-4 border-t border-slate-100">
+                  <span className="text-slate-400 text-xs font-bold">Active Listings</span>
+                  <span className="text-blue-600 font-black text-xl">{totalCount !== null ? totalCount : '130+'}</span>
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -206,7 +224,7 @@ export default function LandingPage() {
       </section>
 
       <footer className="border-t border-slate-200/60 py-8 text-center text-slate-400 text-xs font-semibold pt-12">
-        <p>© 2026 ScrapeScout AI · Neural Opportunity Discovery Platform</p>
+        <p>© 2026 DataScout AI · Neural Opportunity Discovery Platform</p>
       </footer>
     </div>
   );

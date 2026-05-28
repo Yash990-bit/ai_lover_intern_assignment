@@ -99,7 +99,8 @@ export default function DashboardPage() {
     setScrapeResult(null);
     setShowScrapeModal(true);
     try {
-      const res = await fetch('/api/scrape/run', { method: 'POST' });
+      const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || '';
+      const res = await fetch(`${baseUrl}/api/scrape/run`, { method: 'POST' });
       const data = await res.json();
       setScrapeResult(data);
       if (data.success) {
@@ -238,7 +239,7 @@ export default function DashboardPage() {
                       <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                       </svg>
-                      Run AI Scraper
+                      Data Scraper AI
                     </>
                   )}
                 </button>
@@ -380,7 +381,7 @@ export default function DashboardPage() {
       </main>
 
       <footer className="border-t border-slate-200/60 py-8 text-center text-slate-400 text-xs mt-16 font-semibold">
-        <p>© 2026 ScrapeScout AI · Neural Opportunity Discovery Platform</p>
+        <p>© 2026 DataScout AI · Neural Opportunity Discovery Platform</p>
       </footer>
     </div>
   );

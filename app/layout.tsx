@@ -6,7 +6,7 @@ import LayoutShell from '@/components/layout/LayoutShell';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: 'ScrapeScout AI — Global AI-Powered Opportunity Discovery',
+  title: 'DataScout AI — Global AI-Powered Opportunity Discovery',
   description:
     'Discover scholarships, fellowships, accelerators, grants, competitions, and more. Curated for students, founders, researchers, and creators worldwide.',
   keywords: [
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     'india', 'global', 'students', 'women founders',
   ],
   openGraph: {
-    title: 'ScrapeScout AI',
+    title: 'DataScout AI',
     description: 'AI-Powered Global Opportunity Discovery',
     type: 'website',
   },

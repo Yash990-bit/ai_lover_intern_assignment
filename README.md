@@ -1,4 +1,4 @@
-# 🌍 Scrapping AI — Global Opportunity Automation
+# 🌍 DataScout AI — Global Opportunity Automation
 
 A fully automated, AI-powered platform that discovers and tracks global opportunities (scholarships, fellowships, grants, startup accelerators). It scrapes the web, uses LLMs to structure the data, provides a rich natural language search, and offers a personalized application tracking system.
 

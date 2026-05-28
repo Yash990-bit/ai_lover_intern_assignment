@@ -20,4 +20,4 @@ const EmptyState: React.FC<{ message?: string }> = ({ message = 'No items to dis
   </div>
 );
 
-export default EmptyState;
+export default EmptyState

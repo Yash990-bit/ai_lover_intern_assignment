@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
             </svg>
           </div>
           <div className="text-xl font-extrabold tracking-tight text-blue-600">
-            Scrape<span className="text-orange-500">Scout</span> <span className="text-xs font-bold bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full ml-1 uppercase tracking-wider">AI</span>
+            Data<span className="text-orange-500">Scout</span> <span className="text-xs font-bold bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full ml-1 uppercase tracking-wider">AI</span>
           </div>
         </Link>
         
