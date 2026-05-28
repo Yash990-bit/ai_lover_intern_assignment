@@ -21,8 +21,7 @@ const Card: React.FC<CardProps> = ({
   className = '',
   ...rest
 }) => {
-  const baseClasses =
-    'glass-card card-hover-glow rounded-xl p-4 bg-white/5 border border-border-glass backdrop-blur-md';
+  const baseClasses = 'flat-card rounded-xl p-4';
   return (
     <motion.div
       className={`${baseClasses} ${className}`}

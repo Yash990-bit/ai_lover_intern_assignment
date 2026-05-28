@@ -18,12 +18,11 @@ import {
 
 const LISTING_URLS = [
   'https://www.idealist.org/en/internships',
-  'https://www.idealist.org/en/volunteer-opportunities',
   'https://www.idealist.org/en/fellowships',
 ];
 
-const MAX_PER_PAGE = 8;
-const DELAY_MS = 1500;
+const MAX_PER_PAGE = 3;
+const DELAY_MS = 500;
 
 export class IdealistScraper implements IScraper {
   readonly name = 'Idealist';

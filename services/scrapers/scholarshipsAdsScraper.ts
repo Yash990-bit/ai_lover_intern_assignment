@@ -17,13 +17,11 @@ import {
 } from './baseScraper';
 
 const LISTING_URLS = [
-  'https://scholarshipsads.com/',
   'https://scholarshipsads.com/category/fully-funded-scholarships/',
-  'https://scholarshipsads.com/category/masters-scholarships/',
 ];
 
-const MAX_PER_PAGE = 10;
-const DELAY_MS = 1200;
+const MAX_PER_PAGE = 3;
+const DELAY_MS = 500;
 
 export class ScholarshipsAdsScraper implements IScraper {
   readonly name = 'ScholarshipsAds';

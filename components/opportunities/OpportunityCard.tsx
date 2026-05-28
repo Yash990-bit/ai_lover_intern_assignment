@@ -44,7 +44,7 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
   const categoryLabel = opportunity.category?.replace(/_/g, ' ') ?? 'Other';
 
   return (
-    <article className="glass-card p-6 md:p-8 rounded-[2rem] flex flex-col h-full glow-hover transition-all duration-300">
+    <article className="flat-card p-6 rounded-lg flex flex-col h-full transition-all duration-200">
       {/* Header / Category & Save Button */}
       <div className="flex justify-between items-start mb-6 gap-4">
         <div className="flex flex-wrap gap-2">
@@ -71,7 +71,7 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
               }
             } catch(e) {}
           }}
-          className="text-text-secondary hover:text-red-400 transition-colors p-1"
+          className="text-zinc-500 hover:text-red-500 transition-colors p-1"
           title="Save Opportunity"
         >
           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -80,15 +80,15 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
         </button>
       </div>
 
-      <h3 className="font-bold text-xl text-text-primary mb-4 leading-tight line-clamp-2">
+      <h3 className="font-bold text-xl text-zinc-100 mb-4 leading-tight line-clamp-2">
         {opportunity.title}
       </h3>
 
       {/* Org + Country */}
-      <div className="flex flex-col gap-2 mb-4 text-sm text-text-secondary font-medium">
+      <div className="flex flex-col gap-2 mb-4 text-sm text-zinc-400 font-medium">
         {opportunity.organization && (
           <div className="flex items-center gap-2 truncate">
-            <svg className="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
             <span className="truncate">{opportunity.organization}</span>
@@ -96,7 +96,7 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
         )}
         {opportunity.country && (
           <div className="flex items-center gap-2 truncate">
-            <svg className="w-4 h-4 text-secondary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-zinc-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
             </svg>
             <span className="truncate">{opportunity.country}</span>
@@ -107,7 +107,7 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
       {/* Tags / Eligibility */}
       <div className="flex flex-wrap gap-2 mb-6">
         {opportunity.tags && opportunity.tags.slice(0, 3).map((tag) => (
-          <span key={tag} className="bg-surface/50 text-text-secondary border border-border-glass px-3 py-1 rounded-md text-xs font-medium">
+          <span key={tag} className="bg-zinc-800 text-zinc-300 border border-zinc-700 px-3 py-1 rounded-md text-xs font-medium">
             #{tag}
           </span>
         ))}
@@ -126,21 +126,21 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
       </div>
 
       {/* Footer / Meta & Actions */}
-      <div className="mt-auto space-y-6 pt-4 border-t border-border-glass">
+      <div className="mt-auto space-y-6 pt-4 border-t border-zinc-800">
         <div className="flex justify-between items-center">
           <div>
-            <p className="text-text-secondary text-sm font-medium mb-1">Funding Amount</p>
+            <p className="text-zinc-500 text-sm font-medium mb-1">Funding Amount</p>
             {opportunity.funding_amount ? (
-              <p className="text-primary font-bold text-lg">{opportunity.funding_amount}</p>
+              <p className="text-emerald-500 font-bold text-lg">{opportunity.funding_amount}</p>
             ) : (
-              <p className="text-text-secondary text-sm">Not specified</p>
+              <p className="text-zinc-500 text-sm">Not specified</p>
             )}
           </div>
           <div className="text-right">
-            <p className="text-text-secondary text-sm font-medium mb-1">Deadline</p>
-            <div className="flex items-center justify-end gap-2 text-tertiary">
+            <p className="text-zinc-500 text-sm font-medium mb-1">Deadline</p>
+            <div className="flex items-center justify-end gap-2 text-zinc-400">
               {isUrgent && <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>}
-              <p className={`font-bold text-sm ${isUrgent ? 'text-red-400' : 'text-slate-300'}`}>
+              <p className={`font-bold text-sm ${isUrgent ? 'text-red-400' : 'text-zinc-300'}`}>
                 {deadlineLabel}
               </p>
             </div>
@@ -150,7 +150,7 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
         <div className="flex gap-3">
           <a
             href={`/opportunities/${opportunity.id}`}
-            className="flex-1 text-center bg-surface hover:bg-surface-variant text-text-primary py-3 rounded-xl font-bold transition-all duration-300 border border-border-glass text-sm"
+            className="flex-1 text-center bg-zinc-800 hover:bg-zinc-700 text-zinc-100 py-2.5 rounded-md font-semibold transition-colors border border-zinc-700 text-sm"
           >
             Details
           </a>
@@ -162,7 +162,7 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
 
             if (!url) {
               return (
-                <span className="flex-[2] text-center bg-surface/30 text-text-secondary py-3 rounded-xl font-bold border border-border-glass text-sm opacity-50 cursor-not-allowed">
+                <span className="flex-[2] text-center bg-zinc-900 text-zinc-600 py-2.5 rounded-md font-semibold border border-zinc-800 text-sm cursor-not-allowed">
                   No link
                 </span>
               );
@@ -174,7 +174,7 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-[2] flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] text-sm"
+                  className="flex-[2] flex items-center justify-center gap-2 bg-emerald-600 text-white py-2.5 rounded-md font-semibold hover:bg-emerald-500 transition-colors text-sm"
                 >
                   Apply Now
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -189,7 +189,7 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-[2] flex items-center justify-center gap-2 bg-primary/20 hover:bg-primary/30 text-primary border border-primary/30 py-3 rounded-xl font-bold transition-all duration-300 text-sm"
+                className="flex-[2] flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-emerald-400 border border-zinc-700 py-2.5 rounded-md font-semibold transition-colors text-sm"
               >
                 Visit Site
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

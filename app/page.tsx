@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from 'react';
 import Header from '@/components/layout/Header';
 import FilterBar from '@/components/opportunities/FilterBar';
 import OpportunityCard from '@/components/opportunities/OpportunityCard';
-import ParticleBackground from '@/components/3d/ParticleBackground';
 import type { Opportunity, OpportunityFilters, PaginatedResponse } from '@/types';
 
 async function fetchOpportunities(
@@ -128,12 +127,12 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-[#09090b] text-zinc-100">
       <Header />
 
       {/* ── Scrape Now Modal ─────────────────────────────────────────── */}
       {showScrapeModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur px-4">
           <div className="w-full max-w-md bg-slate-900 border border-white/10 rounded-2xl shadow-2xl p-6">
             <div className="flex items-center gap-3 mb-4">
               <div className={`w-3 h-3 rounded-full ${scraping ? 'bg-indigo-400 animate-pulse' : scrapeResult?.success ? 'bg-green-400' : 'bg-red-400'}`} />
@@ -205,18 +204,14 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* Dashboard Header section */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
-        {/* 3D Background */}
-        <ParticleBackground />
-
+      <section className="relative pt-24 pb-12 border-b border-zinc-800 bg-[#09090b]">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row gap-12 items-center justify-between">
+          <div className="flex flex-col gap-8 items-start justify-between">
             <div className="max-w-3xl">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl text-text-primary mb-6 font-bold tracking-tight">
-                Unlock Your Next <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500">Breakthrough</span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white mb-6 font-extrabold tracking-tight">
+                Unlock Your Next <span className="text-emerald-500">Breakthrough.</span>
               </h1>
-              <p className="text-lg text-text-secondary max-w-2xl mb-10 leading-relaxed">
+              <p className="text-lg text-zinc-400 max-w-2xl mb-8 leading-relaxed">
                 Harness the power of neural intelligence to navigate the complex global landscape. We scan millions of data points to deliver curated growth opportunities in real-time.
               </p>
 
@@ -224,7 +219,7 @@ export default function DashboardPage() {
                 <button
                   onClick={handleScrapeNow}
                   disabled={scraping}
-                  className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold px-8 py-3 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="bg-emerald-600 text-white font-semibold px-6 py-2.5 rounded-md hover:bg-emerald-500 transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {scraping ? (
                     <>
@@ -246,14 +241,14 @@ export default function DashboardPage() {
               </div>
 
               {/* Live Intel Stats */}
-              <div className="flex flex-wrap gap-6">
+              <div className="flex flex-wrap gap-4">
                 {STATS_CARDS.map((stat) => (
-                  <div key={stat.label} className="bg-surface/50 backdrop-blur-xl border border-border-glass rounded-2xl p-6 min-w-[180px] group transition-all duration-300 hover:bg-white/5 flex-1 shadow-lg">
-                    <div className="text-text-secondary font-medium text-sm mb-2 flex items-center gap-2">
-                      {stat.label === 'Active' && <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>}
+                  <div key={stat.label} className="bg-zinc-900 border border-zinc-800 rounded-md p-5 min-w-[160px] flex-1 shadow-sm transition-colors hover:border-zinc-700">
+                    <div className="text-zinc-500 font-medium text-sm mb-2 flex items-center gap-2">
+                      {stat.label === 'Active' && <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>}
                       {stat.label}
                     </div>
-                    <div className="font-bold text-3xl text-text-primary group-hover:text-primary transition-colors">
+                    <div className="font-bold text-3xl text-zinc-100">
                       {stat.value}
                     </div>
                   </div>
@@ -262,10 +257,6 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
-
-        {/* Abstract background glow */}
-        <div className="absolute top-[-10%] right-[10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
-        <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
       </section>
 
       {/* Main content */}

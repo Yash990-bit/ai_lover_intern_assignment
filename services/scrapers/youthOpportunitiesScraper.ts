@@ -25,16 +25,11 @@ import {
 const LISTING_URLS = [
   'https://www.youthop.com/scholarships',
   'https://www.youthop.com/fellowships',
-  'https://www.youthop.com/grants',
-  'https://www.youthop.com/competitions',
   'https://www.youthop.com/internships',
-  'https://www.youthop.com/scholarships/page/2',
-  'https://www.youthop.com/fellowships/page/2',
-  'https://www.youthop.com/grants/page/2',
 ];
 
-const MAX_PER_PAGE = 8;
-const DELAY_MS = 1500;
+const MAX_PER_PAGE = 3;
+const DELAY_MS = 500;
 
 export class YouthOpportunitiesScraper implements IScraper {
   readonly name = 'YouthOpportunities';

@@ -17,12 +17,11 @@ import {
 } from './baseScraper';
 
 const LISTING_URLS = [
-  'https://devpost.com/hackathons?status[]=upcoming&status[]=open',
   'https://devpost.com/hackathons?status[]=open',
 ];
 
-const MAX_PER_PAGE = 12;
-const DELAY_MS = 1200;
+const MAX_PER_PAGE = 3;
+const DELAY_MS = 500;
 
 export class DevpostScraper implements IScraper {
   readonly name = 'Devpost';

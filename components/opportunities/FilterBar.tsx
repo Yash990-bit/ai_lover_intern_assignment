@@ -41,7 +41,7 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
   );
 
   return (
-    <div className="bg-surface/30 backdrop-blur-xl p-4 md:p-6 rounded-[2rem] shadow-2xl border border-border-glass">
+    <div className="glass-card p-6 md:p-8 rounded-[2rem] shadow-2xl bg-zinc-900/50 border border-zinc-800/80">
       {/* Search Bars Container */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         {/* Standard Search bar */}
@@ -56,10 +56,7 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
               placeholder="Search keywords, roles, or skills..."
               className="bg-transparent border-none text-text-primary w-full focus:ring-0 text-sm placeholder:text-text-secondary/50 focus:outline-none"
             />
-            <button
-              type="submit"
-              className="bg-surface-variant text-on-surface font-bold px-6 py-2 rounded-xl transition-all hover:brightness-110 ml-2 whitespace-nowrap text-sm"
-            >
+            <button type="submit" className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold px-6 py-2 rounded-xl transition-all hover:brightness-110 ml-2 whitespace-nowrap text-sm">
               Search
             </button>
           </div>

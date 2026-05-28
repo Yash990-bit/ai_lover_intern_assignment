@@ -26,11 +26,10 @@ import {
 const LISTING_URLS = [
   'https://opportunitydesk.org/category/fellowships/',
   'https://opportunitydesk.org/category/grants/',
-  'https://opportunitydesk.org/',   // homepage catches all categories including scholarships/competitions
 ];
 
-const MAX_ARTICLES_PER_PAGE = 8; // polite limit
-const DETAIL_DELAY_MS = 1200;    // pause between detail fetches
+const MAX_ARTICLES_PER_PAGE = 3; // polite limit
+const DETAIL_DELAY_MS = 500;    // pause between detail fetches
 
 export class OpportunityDeskScraper implements IScraper {
   readonly name = 'OpportunityDesk';

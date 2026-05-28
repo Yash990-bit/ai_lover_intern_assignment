@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/layout/Header';
@@ -25,7 +26,7 @@ export default function TrackerPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-white p-4">
+      <div className="min-h-screen bg-[#09090b] text-zinc-100 p-4">
         <Header />
         <div className="space-y-4">
           <LoadingSkeleton />
@@ -38,7 +39,7 @@ export default function TrackerPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-slate-950 text-white p-4">
+      <div className="min-h-screen bg-[#09090b] text-zinc-100 p-4">
         <Header />
         <div className="p-8 text-center border border-red-500/20 bg-red-500/5 rounded-xl text-red-400">
           {error}
@@ -49,7 +50,7 @@ export default function TrackerPage() {
 
   if (savedOpps.length === 0) {
     return (
-      <div className="min-h-screen bg-slate-950 text-white p-4">
+      <div className="min-h-screen bg-[#09090b] text-zinc-100 p-4">
         <Header />
         <EmptyState message="No saved opportunities yet. Browse the dashboard and click ‘Save’ to add them here." />
       </div>
@@ -57,7 +58,7 @@ export default function TrackerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white p-4">
+    <div className="min-h-screen bg-[#09090b] text-zinc-100 p-4">
       <Header />
       <main className="max-w-7xl mx-auto mt-8">
         <h1 className="text-3xl font-bold mb-6 text-white">Application Tracker</h1>
