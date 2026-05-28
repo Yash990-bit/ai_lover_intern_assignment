@@ -1,12 +1,14 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 /**
- * Loading skeleton component with glass‑morphic style.
- * Uses Tailwind classes for animation and background.
+ * Loading skeleton component with premium light glass‑morphic style.
  */
 const LoadingSkeleton: React.FC = () => (
-  <div className="glass-card rounded-xl p-4 bg-white/5 border border-border-glass animate-pulse h-32 w-full" />
+  <div className="rounded-2xl p-6 bg-white/70 border border-slate-200 shadow-sm animate-pulse h-36 w-full space-y-4">
+    <div className="w-24 h-5 bg-slate-200 rounded-full" />
+    <div className="w-3/4 h-6 bg-slate-200 rounded" />
+    <div className="w-1/2 h-4 bg-slate-200 rounded" />
+  </div>
 );
 
 export default LoadingSkeleton;

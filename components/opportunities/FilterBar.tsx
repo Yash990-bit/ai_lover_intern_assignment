@@ -41,22 +41,27 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
   );
 
   return (
-    <div className="glass-card p-6 md:p-8 rounded-[2rem] shadow-2xl bg-zinc-900/50 border border-zinc-800/80">
+    <div className="glass-card p-6 md:p-8 rounded-3xl shadow-sm bg-white/70 border border-slate-200/80">
       {/* Search Bars Container */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         {/* Standard Search bar */}
         <form onSubmit={handleSearchSubmit} className="relative group">
-          <div className="flex items-center gap-4 bg-background-main/50 rounded-2xl px-6 py-4 border border-border-glass focus-within:border-primary transition-all h-full">
-            <svg className="w-6 h-6 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+          <div className="flex items-center gap-4 bg-slate-50 rounded-2xl px-5 py-3 border border-slate-200/80 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100 transition-all h-full shadow-inner">
+            <svg className="w-5 h-5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
             <input
               id="search-input"
               type="text"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               placeholder="Search keywords, roles, or skills..."
-              className="bg-transparent border-none text-text-primary w-full focus:ring-0 text-sm placeholder:text-text-secondary/50 focus:outline-none"
+              className="bg-transparent border-none text-slate-800 w-full focus:ring-0 text-sm placeholder:text-slate-400 focus:outline-none"
             />
-            <button type="submit" className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold px-6 py-2 rounded-xl transition-all hover:brightness-110 ml-2 whitespace-nowrap text-sm">
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold px-6 py-2.5 rounded-xl transition-all hover:shadow-[0_4px_12px_rgba(37,99,235,0.2)] ml-2 whitespace-nowrap text-xs transform active:scale-95"
+            >
               Search
             </button>
           </div>
@@ -69,19 +74,21 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
             onFiltersChange({ search: aiSearchValue, ai_mode: true, page: 1 } as any);
           }
         }} className="relative group">
-          <div className="flex items-center gap-4 bg-background-main/50 rounded-2xl px-6 py-4 border border-border-glass focus-within:border-primary transition-all h-full shadow-[0_0_15px_rgba(99,102,241,0.1)]">
-            <svg className="w-6 h-6 text-primary animate-pulse shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+          <div className="flex items-center gap-4 bg-slate-50 rounded-2xl px-5 py-3 border border-slate-200/80 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-100 transition-all h-full shadow-inner">
+            <svg className="w-5 h-5 text-orange-500 animate-pulse shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
             <input
               id="ai-search-input"
               type="text"
               value={aiSearchValue}
               onChange={(e) => setAiSearchValue(e.target.value)}
               placeholder="Ask AI: e.g. 'Show me grants for women founders...'"
-              className="bg-transparent border-none text-text-primary w-full focus:ring-0 text-sm placeholder:text-text-secondary/50 focus:outline-none"
+              className="bg-transparent border-none text-slate-800 w-full focus:ring-0 text-sm placeholder:text-slate-400 focus:outline-none"
             />
             <button
               type="submit"
-              className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold px-6 py-2 rounded-xl transition-all hover:brightness-110 ml-2 whitespace-nowrap text-sm"
+              className="bg-gradient-to-r from-orange-500 to-orange-400 text-white font-bold px-6 py-2.5 rounded-xl transition-all hover:shadow-[0_4px_12px_rgba(249,115,22,0.2)] ml-2 whitespace-nowrap text-xs transform active:scale-95"
             >
               AI Discovery
             </button>
@@ -91,7 +98,7 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
 
       {/* Filter chips */}
       <div className="mt-6 flex flex-wrap items-center gap-3">
-        <span className="text-text-secondary font-medium text-sm px-2">Filters:</span>
+        <span className="text-slate-400 font-bold uppercase tracking-wider text-[10px] px-1">Filters</span>
         
         {/* Category dropdown */}
         <div className="relative group">
@@ -99,16 +106,18 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
             id="filter-category"
             value={filters.category ?? ''}
             onChange={(e) => onFiltersChange({ category: e.target.value || undefined, page: 1 })}
-            className="appearance-none px-4 py-2 rounded-full bg-surface/50 backdrop-blur-md border border-border-glass hover:bg-primary/20 hover:border-primary transition-all text-sm font-medium text-text-primary focus:outline-none cursor-pointer min-w-[160px]"
+            className="appearance-none px-4 py-2 pr-9 rounded-full bg-slate-50 border border-slate-200 hover:bg-slate-100 hover:border-slate-300 transition-all text-xs font-semibold text-slate-700 focus:outline-none cursor-pointer min-w-[150px] shadow-sm"
           >
             {CATEGORIES.map((c) => (
-              <option key={c.value} value={c.value} className="bg-surface text-text-primary py-2">
+              <option key={c.value} value={c.value} className="bg-white text-slate-800">
                 {c.label}
               </option>
             ))}
           </select>
-          <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-text-secondary">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+          <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-slate-400">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
         </div>
 
@@ -118,29 +127,31 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
             id="filter-remote-type"
             value={filters.remote_type ?? ''}
             onChange={(e) => onFiltersChange({ remote_type: e.target.value || undefined, page: 1 })}
-            className="appearance-none px-4 py-2 rounded-full bg-surface/50 backdrop-blur-md border border-border-glass hover:bg-primary/20 hover:border-primary transition-all text-sm font-medium text-text-primary focus:outline-none cursor-pointer min-w-[140px]"
+            className="appearance-none px-4 py-2 pr-9 rounded-full bg-slate-50 border border-slate-200 hover:bg-slate-100 hover:border-slate-300 transition-all text-xs font-semibold text-slate-700 focus:outline-none cursor-pointer min-w-[130px] shadow-sm"
           >
             {REMOTE_TYPES.map((r) => (
-              <option key={r.value} value={r.value} className="bg-surface text-text-primary">
+              <option key={r.value} value={r.value} className="bg-white text-slate-800">
                 {r.label}
               </option>
             ))}
           </select>
-          <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-text-secondary">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+          <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-slate-400">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
         </div>
 
-        <div className="h-6 w-px bg-border-glass mx-2 hidden sm:block"></div>
+        <div className="h-5 w-px bg-slate-200 mx-1 hidden sm:block"></div>
 
         {/* Toggle chips */}
         <button
           id="filter-student"
           onClick={() => onFiltersChange({ student_eligible: !filters.student_eligible || undefined, page: 1 })}
-          className={`px-4 py-2 rounded-full border transition-all text-sm font-medium flex items-center gap-2 ${
+          className={`px-4 py-2 rounded-full border transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm transform active:scale-95 ${
             filters.student_eligible
-              ? 'bg-primary/20 border-primary text-primary'
-              : 'bg-surface/50 border-border-glass hover:bg-primary/10 hover:border-primary/50 text-text-primary'
+              ? 'bg-blue-50 border-blue-200 text-blue-600'
+              : 'bg-slate-50 border-slate-200 hover:bg-slate-100 text-slate-600'
           }`}
         >
           🎓 Students
@@ -149,10 +160,10 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
         <button
           id="filter-women"
           onClick={() => onFiltersChange({ women_founder_friendly: !filters.women_founder_friendly || undefined, page: 1 })}
-          className={`px-4 py-2 rounded-full border transition-all text-sm font-medium flex items-center gap-2 ${
+          className={`px-4 py-2 rounded-full border transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm transform active:scale-95 ${
             filters.women_founder_friendly
-              ? 'bg-primary/20 border-primary text-primary'
-              : 'bg-surface/50 border-border-glass hover:bg-primary/10 hover:border-primary/50 text-text-primary'
+              ? 'bg-rose-50 border-rose-200 text-rose-600'
+              : 'bg-slate-50 border-slate-200 hover:bg-slate-100 text-slate-600'
           }`}
         >
           ♀ Women-friendly
@@ -161,10 +172,10 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
         <button
           id="filter-india"
           onClick={() => onFiltersChange({ indian_applicant_eligible: !filters.indian_applicant_eligible || undefined, page: 1 })}
-          className={`px-4 py-2 rounded-full border transition-all text-sm font-medium flex items-center gap-2 ${
+          className={`px-4 py-2 rounded-full border transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm transform active:scale-95 ${
             filters.indian_applicant_eligible
-              ? 'bg-primary/20 border-primary text-primary'
-              : 'bg-surface/50 border-border-glass hover:bg-primary/10 hover:border-primary/50 text-text-primary'
+              ? 'bg-amber-50 border-amber-200 text-amber-700'
+              : 'bg-slate-50 border-slate-200 hover:bg-slate-100 text-slate-600'
           }`}
         >
           🇮🇳 India eligible
@@ -189,9 +200,11 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
                 page: 1,
               });
             }}
-            className="text-primary font-medium text-sm hover:underline ml-auto flex items-center gap-1"
+            className="text-blue-600 font-extrabold text-xs hover:underline ml-auto flex items-center gap-1 transition-all"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+            </svg>
             Clear all
           </button>
         )}

@@ -12,6 +12,7 @@ export async function PATCH(
     return NextResponse.json(updated, { status: 200 });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
+    console.error('Saved PATCH error:', err);
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
@@ -26,6 +27,7 @@ export async function DELETE(
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
+    console.error('Saved DELETE error:', err);
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

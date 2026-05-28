@@ -11,15 +11,16 @@ module.exports = {
     extend: {
 
       colors: {
-
-        primary: "hsl(210, 50%, 55%)",
-
-        accent: "hsl(340, 70%, 60%)",
-
-        background: "hsl(0, 0%, 100%)",
-
-        surface: "hsl(0, 0%, 98%)",
-        
+        primary: "rgb(var(--color-primary))",
+        secondary: "rgb(var(--color-secondary))",
+        "background-main": "var(--color-bg)",
+        "background-card": "var(--color-card-bg)",
+        "border-glass": "var(--color-card-border)",
+        "text-primary": "var(--color-text-main)",
+        "text-secondary": "var(--color-text-muted)",
+        accent: "rgb(var(--color-secondary))",
+        background: "var(--color-bg)",
+        surface: "rgba(255, 255, 255, 0.7)",
       },
 
     },

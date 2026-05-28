@@ -1,9 +1,7 @@
 import React from 'react';
-import { motion, MotionProps } from 'framer-motion';
+import { motion, HTMLMotionProps } from 'framer-motion';
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Motion props for framer-motion animations */
-  motionProps?: MotionProps;
+interface CardProps extends HTMLMotionProps<'div'> {
   /** Optional click handler */
   onClick?: () => void;
   /** Additional class names */
@@ -16,7 +14,6 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 const Card: React.FC<CardProps> = ({
   children,
-  motionProps,
   onClick,
   className = '',
   ...rest
@@ -26,7 +23,6 @@ const Card: React.FC<CardProps> = ({
     <motion.div
       className={`${baseClasses} ${className}`}
       onClick={onClick}
-      {...motionProps}
       {...rest}
     >
       {children}

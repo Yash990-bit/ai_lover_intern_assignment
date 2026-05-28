@@ -16,7 +16,7 @@ const LayoutShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <div className="pt-16 flex flex-1 overflow-hidden min-h-[calc(100vh-4rem)]">
         {/* Sidebar should take full height of the remaining viewport */}
         <Sidebar />
-        <main className="flex-1 overflow-y-auto p-4 bg-gray-950 text-gray-100">
+        <main className="flex-1 overflow-y-auto p-4 bg-transparent text-slate-800">
           <AnimatePresence mode="wait">
             <motion.div
               key={pathname}

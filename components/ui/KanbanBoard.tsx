@@ -7,16 +7,16 @@ import type { SavedOpportunity } from '@/types';
 
 /**
  * Simple Kanban board that groups saved opportunities by their application status.
- * Uses react-beautiful-dnd for drag‑and‑drop support (requires the library).
+ * Uses hello-pangea/dnd for robust drag‑and‑drop support.
  */
 const STATUS_COLORS: Record<string, string> = {
-  'Saved': 'border-l-slate-500',
+  'Saved': 'border-l-slate-400',
   'Planning to Apply': 'border-l-blue-500',
-  'Applied': 'border-l-amber-500',
+  'Applied': 'border-l-indigo-500',
   'Interview': 'border-l-purple-500',
   'Accepted': 'border-l-emerald-500',
   'Rejected': 'border-l-rose-500',
-  'Waitlisted': 'border-l-indigo-500'
+  'Waitlisted': 'border-l-amber-500'
 };
 
 const KanbanBoard: React.FC<{
@@ -53,33 +53,36 @@ const KanbanBoard: React.FC<{
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="flex flex-col md:flex-row gap-4 overflow-x-auto p-2" role="region" aria-label="Kanban Board">
+      <div className="flex flex-col md:flex-row gap-5 overflow-x-auto pb-4 pt-1" role="region" aria-label="Kanban Board">
         {Object.entries(columns).map(([status, items]) => (
           <motion.div
             key={status}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`flex-1 min-w-[300px] bg-zinc-900 border border-zinc-800 rounded-lg p-4 border-l-4 ${STATUS_COLORS[status] || 'border-l-gray-500'}`}
+            className={`flex-1 min-w-[280px] bg-white/60 backdrop-blur-md border border-slate-200/80 rounded-2xl p-4 border-l-4 shadow-sm flex flex-col ${STATUS_COLORS[status] || 'border-l-gray-400'}`}
           >
-            <h3 className="text-lg font-semibold mb-3 flex justify-between items-center text-zinc-100">
+            <h3 className="text-sm font-extrabold mb-4 flex justify-between items-center text-slate-700 tracking-wide uppercase">
               {status}
-              <span className="text-sm bg-zinc-800 text-zinc-300 px-2 py-0.5 rounded-md font-mono">{items.length}</span>
+              <span className="text-xs bg-slate-100 text-slate-500 px-2.5 py-0.5 rounded-full font-bold">{items.length}</span>
             </h3>
             <Droppable droppableId={status} type="CARD">
               {(provided) => (
-                <div ref={provided.innerRef} {...provided.droppableProps} className="min-h-[100px]">
+                <div ref={provided.innerRef} {...provided.droppableProps} className="min-h-[250px] flex-1">
                   {items.map((s, i) => (
                     <Draggable key={s.id} draggableId={s.id} index={i}>
                       {(providedCard) => (
                         <div
-                          className="bg-zinc-800 border border-zinc-700 rounded-md p-3 mb-3 cursor-grab hover:bg-zinc-700 transition-colors shadow-sm"
+                          className="bg-white border border-slate-200/80 rounded-xl p-4 mb-3 cursor-grab hover:border-blue-400 hover:shadow-md transition-all duration-200 shadow-sm group"
                           ref={providedCard.innerRef}
                           {...providedCard.draggableProps}
                           {...providedCard.dragHandleProps}
                           role="listitem"
                         >
-                          <p className="font-medium line-clamp-1 text-zinc-100">{s.opportunity?.title}</p>
-                          <small className="text-zinc-500">{s.priority} priority</small>
+                          <p className="font-extrabold text-sm line-clamp-2 text-slate-800 group-hover:text-blue-600 transition-colors leading-snug">{s.opportunity?.title}</p>
+                          <div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-50">
+                            <span className="text-[10px] uppercase font-bold text-slate-400">{s.priority} Priority</span>
+                            <span className="text-[10px] text-slate-500 font-semibold">{s.opportunity?.organization}</span>
+                          </div>
                         </div>
                       )}
                     </Draggable>

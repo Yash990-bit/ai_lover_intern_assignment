@@ -24,6 +24,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(saved, { status: 201 });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
+    console.error('Saved POST error:', err);
     if (message === 'Already saved') {
       return NextResponse.json({ error: message }, { status: 409 });
     }
