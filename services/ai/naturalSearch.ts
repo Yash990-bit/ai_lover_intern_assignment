@@ -3,15 +3,15 @@ import { checkAiClient, AI_MODEL } from './aiClient';
 import type { OpportunityFilters } from '@/types';
 
 const NaturalSearchSchema = z.object({
-  search: z.string().optional(),
-  category: z.string().optional(),
-  country: z.string().optional(),
-  region: z.string().optional(),
-  remote_type: z.enum(['remote', 'in-person', 'hybrid']).optional(),
-  women_founder_friendly: z.boolean().optional(),
-  indian_applicant_eligible: z.boolean().optional(),
-  student_eligible: z.boolean().optional(),
-  tag: z.string().optional(),
+  search: z.string().nullable().optional().catch(undefined),
+  category: z.string().nullable().optional().catch(undefined),
+  country: z.string().nullable().optional().catch(undefined),
+  region: z.string().nullable().optional().catch(undefined),
+  remote_type: z.enum(['remote', 'in-person', 'hybrid']).nullable().optional().catch(undefined),
+  women_founder_friendly: z.boolean().nullable().optional().catch(undefined),
+  indian_applicant_eligible: z.boolean().nullable().optional().catch(undefined),
+  student_eligible: z.boolean().nullable().optional().catch(undefined),
+  tag: z.string().nullable().optional().catch(undefined),
 });
 
 export async function parseNaturalSearchQuery(

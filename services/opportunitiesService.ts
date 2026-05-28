@@ -52,9 +52,13 @@ export async function getOpportunities(
   if (deadlineAfter) query = query.gte('deadline', deadlineAfter);
 
   if (search) {
-    query = query.or(
-      `title.ilike.%${search}%,organization.ilike.%${search}%,description.ilike.%${search}%,eligibility.ilike.%${search}%`
-    );
+    // Strip commas and parentheses to avoid PostgREST .or() syntax confusion
+    const cleanSearch = search.replace(/[,()]/g, ' ').replace(/\s+/g, ' ').trim();
+    if (cleanSearch) {
+      query = query.or(
+        `title.ilike.%${cleanSearch}%,organization.ilike.%${cleanSearch}%,description.ilike.%${cleanSearch}%,eligibility.ilike.%${cleanSearch}%`
+      );
+    }
   }
 
   const from = (page - 1) * pageSize;
