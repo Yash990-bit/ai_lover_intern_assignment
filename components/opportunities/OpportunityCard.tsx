@@ -1,4 +1,5 @@
 'use client';
+import { motion } from 'framer-motion';
 
 import type { Opportunity } from '@/types';
 
@@ -44,7 +45,7 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
   const categoryLabel = opportunity.category?.replace(/_/g, ' ') ?? 'Other';
 
   return (
-    <article className="flat-card p-6 rounded-2xl flex flex-col h-full bg-white/70 border border-slate-200/80 shadow-sm transition-all duration-300 hover:shadow-md hover:border-blue-200">
+    <motion.article layout whileHover={{ scale: 1.02, boxShadow: '0 8px 24px rgba(0,0,0,0.1)' }} className="flat-card p-6 rounded-2xl flex flex-col h-full bg-white/70 border border-slate-200/80 shadow-sm transition-all duration-300 hover:shadow-md hover:border-blue-200">
       {/* Header / Category & Save Button */}
       <div className="flex justify-between items-start mb-5 gap-4">
         <div className="flex flex-wrap gap-2">
@@ -200,6 +201,6 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
           })()}
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }

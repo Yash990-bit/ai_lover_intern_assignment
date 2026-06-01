@@ -1,101 +1,105 @@
-"use client";
+/* components/ui/KanbanBoard.tsx */
+'use client';
 
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
+import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { motion } from 'framer-motion';
+import OpportunityCard from '@/components/opportunities/OpportunityCard';
+import type { SavedOpportunity, ApplicationStatus, Priority } from '@/types';
 
-import type { SavedOpportunity } from '@/types';
+// Columns representing the pipeline stages
+const COLUMNS: { id: string; label: string; color: string; type: 'status' | 'priority' }[] = [
+  { id: 'Saved', label: 'Saved', color: 'bg-slate-100', type: 'status' },
+  { id: 'Medium', label: 'Medium Priority', color: 'bg-amber-100', type: 'priority' },
+  { id: 'Planning', label: 'Planning to Apply', color: 'bg-purple-100', type: 'status' },
+];
 
-/**
- * Simple Kanban board that groups saved opportunities by their application status.
- * Uses hello-pangea/dnd for robust drag‑and‑drop support.
- */
-const STATUS_COLORS: Record<string, string> = {
-  'Saved': 'border-l-slate-400',
-  'Planning to Apply': 'border-l-blue-500',
-  'Applied': 'border-l-indigo-500',
-  'Interview': 'border-l-purple-500',
-  'Accepted': 'border-l-emerald-500',
-  'Rejected': 'border-l-rose-500',
-  'Waitlisted': 'border-l-amber-500'
-};
-
-const KanbanBoard: React.FC<{
+interface KanbanBoardProps {
   savedOpps: SavedOpportunity[];
-  onStatusChange: (id: string, newStatus: string) => void;
-}> = ({ savedOpps, onStatusChange }) => {
-  // Group opportunities by status, pre-initializing all standard statuses so empty columns are visible
-  const columns: Record<string, SavedOpportunity[]> = {
-    'Saved': [],
-    'Planning to Apply': [],
-    'Applied': [],
-    'Interview': [],
-    'Accepted': [],
-    'Rejected': [],
-    'Waitlisted': []
-  };
+  /**
+   * Called when a card is moved to a new column.
+   * `newStatus` is the column identifier, `newPriority` is optional (we set Medium for "Medium" column, Low otherwise).
+   */
+  onStatusChange: (id: string, newStatus: ApplicationStatus, newPriority: Priority) => Promise<void>;
+}
 
-  savedOpps.forEach((s) => {
-    const status = s.application_status;
-    if (!columns[status]) columns[status] = [];
-    columns[status].push(s);
-  });
-
-  // Handle drag end to update status
-  const handleDragEnd = (result: any) => {
+export default function KanbanBoard({ savedOpps, onStatusChange }: KanbanBoardProps) {
+  const handleDragEnd = async (result: DropResult) => {
     const { destination, source, draggableId } = result;
     if (!destination) return;
+    // No change
     if (destination.droppableId === source.droppableId && destination.index === source.index) return;
-    const movedOpp = savedOpps.find((o) => o.id === draggableId);
-    if (movedOpp) {
-      onStatusChange(movedOpp.id, destination.droppableId);
+
+    const opp = savedOpps.find((o) => o.id === draggableId);
+    if (!opp) return;
+
+    let newStatus: ApplicationStatus = opp.application_status;
+    let newPriority: Priority = opp.priority;
+
+    if (destination.droppableId === 'Saved') {
+      newStatus = 'Saved';
+      newPriority = 'Low';
+    } else if (destination.droppableId === 'Planning') {
+      newStatus = 'Planning to Apply';
+      newPriority = 'Low';
+    } else if (destination.droppableId === 'Medium') {
+      // priority column – keep status unchanged
+      newPriority = 'Medium';
     }
+    await onStatusChange(draggableId, newStatus, newPriority);
   };
 
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="flex flex-col md:flex-row gap-5 overflow-x-auto pb-4 pt-1" role="region" aria-label="Kanban Board">
-        {Object.entries(columns).map(([status, items]) => (
-          <motion.div
-            key={status}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={`flex-1 min-w-[280px] bg-white/60 backdrop-blur-md border border-slate-200/80 rounded-2xl p-4 border-l-4 shadow-sm flex flex-col ${STATUS_COLORS[status] || 'border-l-gray-400'}`}
-          >
-            <h3 className="text-sm font-extrabold mb-4 flex justify-between items-center text-slate-700 tracking-wide uppercase">
-              {status}
-              <span className="text-xs bg-slate-100 text-slate-500 px-2.5 py-0.5 rounded-full font-bold">{items.length}</span>
-            </h3>
-            <Droppable droppableId={status} type="CARD">
+    <section className="bg-white/30 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-slate-200/60">
+      <h2 className="text-2xl font-extrabold text-slate-800 mb-4">Application Tracker</h2>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          {COLUMNS.map((col) => (
+            <Droppable droppableId={col.id} key={col.id}>
               {(provided) => (
-                <div ref={provided.innerRef} {...provided.droppableProps} className="min-h-[250px] flex-1">
-                  {items.map((s, i) => (
-                    <Draggable key={s.id} draggableId={s.id} index={i}>
-                      {(providedCard) => (
-                        <div
-                          className="bg-white border border-slate-200/80 rounded-xl p-4 mb-3 cursor-grab hover:border-blue-400 hover:shadow-md transition-all duration-200 shadow-sm group"
-                          ref={providedCard.innerRef}
-                          {...providedCard.draggableProps}
-                          {...providedCard.dragHandleProps}
-                          role="listitem"
-                        >
-                          <p className="font-extrabold text-sm line-clamp-2 text-slate-800 group-hover:text-blue-600 transition-colors leading-snug">{s.opportunity?.title}</p>
-                          <div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-50">
-                            <span className="text-[10px] uppercase font-bold text-slate-400">{s.priority} Priority</span>
-                            <span className="text-[10px] text-slate-500 font-semibold">{s.opportunity?.organization}</span>
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  className={`flex flex-col gap-4 min-h-[400px] p-4 rounded-xl ${col.color}`}
+                >
+                  <h3 className="text-lg font-bold text-slate-800 mb-2">{col.label}</h3>
+                  {savedOpps
+                    .filter((opp) =>
+                      col.type === 'status'
+                        ? opp.application_status === (col.id === 'Planning' ? 'Planning to Apply' : col.id)
+                        : opp.priority === (col.id === 'Medium' ? 'Medium' : 'Low')
+                    )
+                    .map((opp, index) => (
+                      <Draggable key={opp.id} draggableId={opp.id} index={index}>
+                        {(providedCard, snapshot) => (
+                          <div
+                            ref={providedCard.innerRef}
+                            {...providedCard.draggableProps}
+                            {...providedCard.dragHandleProps}
+                            aria-grabbed={snapshot.isDragging}
+                            tabIndex={0}
+                            className="flex flex-col h-full"
+                          >
+                            <motion.article
+                              layout
+                              whileHover={{
+                                scale: 1.02,
+                                boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
+                              }}
+                              className="flex flex-col h-full"
+                            >
+                              <OpportunityCard opportunity={opp.opportunity!} />
+                            </motion.article>
                           </div>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
+                        )}
+                      </Draggable>
+                    ))}
                   {provided.placeholder}
                 </div>
               )}
             </Droppable>
-          </motion.div>
-        ))}
-      </div>
-    </DragDropContext>
+          ))}
+        </div>
+      </DragDropContext>
+    </section>
   );
-};
-
-export default KanbanBoard;
+}

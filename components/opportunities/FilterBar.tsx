@@ -1,4 +1,5 @@
 'use client';
+import { motion } from 'framer-motion';
 
 import { useState, useCallback } from 'react';
 import type { OpportunityFilters } from '@/types';
@@ -35,7 +36,7 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
   const handleSearchSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
-      onFiltersChange({ search: searchValue, ai_mode: false, page: 1 });
+      onFiltersChange({ search: searchValue, page: 1, ai_mode: false });
     },
     [searchValue, onFiltersChange]
   );
@@ -69,7 +70,7 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
         <form onSubmit={(e) => {
           e.preventDefault();
           if (aiSearchValue.trim()) {
-            onFiltersChange({ search: aiSearchValue, ai_mode: true, page: 1 } as any);
+            onFiltersChange({ search: aiSearchValue, page: 1, ai_mode: true });
           }
         }} className="relative group">
           <div className="flex items-center gap-4 bg-slate-50 rounded-2xl px-5 py-3 border border-slate-200/80 focus-within:border-orange-500 focus-within:ring-2 focus-within:ring-orange-100 transition-all h-full shadow-inner">
