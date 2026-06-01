@@ -131,6 +131,7 @@ export interface OpportunityFilters {
   tag?: string;
   deadlineBefore?: string;
   deadlineAfter?: string;
+  ai_mode?: boolean;
   page?: number;
   pageSize?: number;
 }

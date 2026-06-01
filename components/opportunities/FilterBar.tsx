@@ -42,9 +42,7 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
 
   return (
     <div className="glass-card p-6 md:p-8 rounded-3xl shadow-sm bg-white/70 border border-slate-200/80">
-      {/* Search Bars Container */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-        {/* Standard Search bar */}
         <form onSubmit={handleSearchSubmit} className="relative group">
           <div className="flex items-center gap-4 bg-slate-50 rounded-2xl px-5 py-3 border border-slate-200/80 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100 transition-all h-full shadow-inner">
             <svg className="w-5 h-5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,11 +94,9 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
         </form>
       </div>
 
-      {/* Filter chips */}
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <span className="text-slate-400 font-bold uppercase tracking-wider text-[10px] px-1">Filters</span>
         
-        {/* Category dropdown */}
         <div className="relative group">
           <select
             id="filter-category"
@@ -121,7 +117,6 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
           </div>
         </div>
 
-        {/* Remote type */}
         <div className="relative group">
           <select
             id="filter-remote-type"
@@ -210,5 +205,5 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
         )}
       </div>
     </div>
-  );
+  )
 }
