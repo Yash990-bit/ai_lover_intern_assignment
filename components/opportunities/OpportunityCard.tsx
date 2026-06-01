@@ -2,6 +2,8 @@
 import { motion } from 'framer-motion';
 
 import type { Opportunity } from '@/types';
+import { useState } from 'react';
+
 
 const CATEGORY_COLORS: Record<string, string> = {
   scholarship: 'bg-blue-50 text-blue-700 border-blue-100',
@@ -43,6 +45,7 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
   const { label: deadlineLabel, urgent: isUrgent } = formatDeadline(opportunity.deadline);
 
   const categoryLabel = opportunity.category?.replace(/_/g, ' ') ?? 'Other';
+  const [showAiModal, setShowAiModal] = useState(false);
 
   return (
     <motion.article layout whileHover={{ scale: 1.02, boxShadow: '0 8px 24px rgba(0,0,0,0.1)' }} className="flat-card p-6 rounded-2xl flex flex-col h-full bg-white/70 border border-slate-200/80 shadow-sm transition-all duration-300 hover:shadow-md hover:border-blue-200">
@@ -58,27 +61,29 @@ export default function OpportunityCard({ opportunity }: OpportunityCardProps) {
             </span>
           )}
         </div>
-        <button
-          onClick={async (e) => {
-            e.preventDefault();
-            try {
-              const res = await fetch('/api/saved', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ opportunityId: opportunity.id })
-              });
-              if (res.ok || res.status === 409) {
-                alert('Saved!');
-              }
-            } catch(e) {}
-          }}
-          className="text-slate-400 hover:text-orange-500 transition-colors p-1"
-          title="Save Opportunity"
-        >
-          <svg className="w-5.5 h-5.5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
-        </button>
+
+      {/* Save Button */}
+      <button
+        onClick={async (e) => {
+          e.preventDefault();
+          try {
+            const res = await fetch('/api/saved', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ opportunityId: opportunity.id })
+            });
+            if (res.ok || res.status === 409) {
+              alert('Saved!');
+            }
+          } catch (e) {}
+        }}
+        className="text-slate-400 hover:text-orange-500 transition-colors p-1"
+        title="Save Opportunity"
+      >
+        <svg className="w-5.5 h-5.5" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      </button>
       </div>
 
       <h3 className="font-extrabold text-lg text-slate-800 mb-3 leading-snug line-clamp-2 hover:text-blue-600 transition-colors">
