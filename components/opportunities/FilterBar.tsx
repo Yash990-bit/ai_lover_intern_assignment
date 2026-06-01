@@ -35,7 +35,7 @@ export default function FilterBar({ filters, onFiltersChange }: FilterBarProps) 
   const handleSearchSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
-      onFiltersChange({ search: searchValue, page: 1 });
+      onFiltersChange({ search: searchValue, ai_mode: false, page: 1 });
     },
     [searchValue, onFiltersChange]
   );

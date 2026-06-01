@@ -14,18 +14,27 @@ export async function POST(request: NextRequest) {
     const filters = await parseNaturalSearchQuery(query);
 
     // If AI fails or returns empty, fallback to basic search
-    const finalFilters = filters && Object.keys(filters).length > 0
-      ? filters
-      : { search: query };
+    const finalFilters = filters && Object.keys(filters).length > 0 ? filters : { search: query };
 
     // Fetch using standard opportunities service
     const results = await getOpportunities(finalFilters);
 
+    // If AI filters yielded no results, retry with plain search
+    let usedFallback = false;
+    let finalResults = results;
+    if (filters && Object.keys(filters).length > 0 && results.data.length === 0) {
+      const fallbackResults = await getOpportunities({ search: query });
+      if (fallbackResults.data.length > 0) {
+        finalResults = fallbackResults;
+        usedFallback = true;
+      }
+    }
+
     return NextResponse.json({
       filters: finalFilters,
-      results
+      results: finalResults,
+      aiFallbackUsed: usedFallback,
     }, { status: 200 });
-
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
     return NextResponse.json({ error: message }, { status: 500 });

@@ -86,13 +86,12 @@ export default function DashboardPage() {
   useEffect(() => { loadStats(); }, [loadStats]);
 
   const handleFiltersChange = useCallback((partial: Partial<OpportunityFilters>) => {
-    setFilters((prev) => {
-      if (partial.search !== undefined && !(partial as any).ai_mode) {
-        (prev as any).ai_mode = false;
-      }
-      return { ...prev, ...partial };
-    });
-  }, []);
+  setFilters((prev) => ({
+    ...prev,
+    ...partial,
+    ai_mode: (partial as any).ai_mode ?? false,
+  }));
+}, []);
 
   const handleScrapeNow = async () => {
     setScraping(true);
