@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabaseClient';
 import OpportunityCard from '@/components/opportunities/OpportunityCard';
 import type { Opportunity } from '@/types';
+import FeaturedGrant from '@/components/opportunities/FeaturedGrant';
 
 export default function LandingPage() {
   const [recentOpps, setRecentOpps] = useState<Opportunity[]>([]);
@@ -66,7 +67,6 @@ export default function LandingPage() {
 
   return (
     <div className="bg-transparent text-slate-800 space-y-16 pb-20">
-      
       {/* ── Hero Presentation Banner ───────────────────────────────────── */}
       <section className="relative py-16 md:py-20 border-b border-slate-200/80 bg-white/40 backdrop-blur-md rounded-3xl p-6 md:p-12 shadow-sm text-center md:text-left">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10 justify-between">
@@ -74,11 +74,11 @@ export default function LandingPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-600 border border-blue-100 uppercase tracking-wider animate-pulse">
               🚀 Discover Curation Redefined
             </div>
-            
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-none text-slate-800">
               Discover Your Next <span className="bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent">Global Leap.</span>
             </h1>
-            
+
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
               DataScout AI combines real-time multi-source scraping with artificial intelligence to deliver high-impact scholarships, fellowships, grants, and accelerators straight to you.
             </p>
@@ -93,7 +93,7 @@ export default function LandingPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </Link>
-              
+
               <Link
                 href="/opportunities"
                 className="w-full sm:w-auto bg-white border border-slate-200 text-slate-700 font-bold px-8 py-3.5 rounded-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2 text-sm shadow-sm"
@@ -106,7 +106,7 @@ export default function LandingPage() {
           {/* Visual Floating Graphic */}
           <div className="hidden lg:block relative w-80 h-80">
             <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-600/10 to-orange-500/10 blur-2xl animate-pulse" />
-            
+
             {/* Absolute Centered Parent Container */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64">
               {/* Inner card with smooth floating motion */}
@@ -125,14 +125,7 @@ export default function LandingPage() {
                   <span className="text-4xl">🧠</span>
                   <span className="text-[10px] font-bold text-slate-400 bg-slate-50 border border-slate-100 rounded-full px-2.5 py-0.5 uppercase tracking-wide">Discovery</span>
                 </div>
-                
-                {/* Premium Featured Opportunity Preview */}
-                <div className="space-y-1.5 text-left border-l-2 border-l-blue-500 pl-3 py-1">
-                  <p className="text-[9px] font-bold text-blue-600 uppercase tracking-wider">Featured Grant</p>
-                  <p className="text-xs font-extrabold text-slate-800 leading-tight">Global AI Fellowship</p>
-                  <p className="text-[10px] text-slate-400 font-semibold">$50,000 Funding · Remote</p>
-                </div>
-                
+                <FeaturedGrant />
                 <div className="flex justify-between items-center pt-4 border-t border-slate-100">
                   <span className="text-slate-400 text-xs font-bold">Active Listings</span>
                   <span className="text-blue-600 font-black text-xl">{totalCount !== null ? totalCount : '130+'}</span>
